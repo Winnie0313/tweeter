@@ -20,6 +20,8 @@
     <link rel="stylesheet" href="/styles/header.css" type="text/css" />
     <!-- Main CSS -->
     <link rel="stylesheet" href="/styles/new-tweet.css" type="text/css" />
+    <!-- tweet container CSS -->
+    <link rel="stylesheet" href="/styles/tweets.css" type="text/css" />
   
 
     <!-- Font awesome -->
@@ -45,8 +47,8 @@
       </div>
     </nav>
 
-    <header>
-      <div class="avatar-container">
+    <header class="header-container">
+      <div>
           <img src="/images/profile-hex.png"> 
       </div>
       <div class="username">
@@ -55,7 +57,7 @@
   </header>
 
     <!-- Page-specific (main) content here -->
-    <main class="container">
+    <main>
       <section class="new-tweet">
         <h2 class="compose-tweet">Compose Tweet</h2>
         <form action="/tweets/" method="POST">
@@ -66,6 +68,32 @@
             <output name="counter" class="counter" for="tweet-text">140</output>
           </div>
         </form>
+      </section>
+      <!-- tweet container -->
+      <section class="tweet-container">
+        <article>
+          <header>
+            <div>
+              <i class="fa-solid fa-user-astronaut"></i>
+              <p>Winnie</p>
+            </div>
+            <p>@Wanyi</p>
+          </header>
+
+          <div>
+            <p>Tough times never last but tough people do</p>
+          </div>
+
+          <footer>
+            <span>2 days ago</span>
+            <div>
+              <i class="fa-solid fa-flag"></i>
+              <i class="fa-solid fa-share"></i>
+              <i class="fa-solid fa-heart"></i>
+            </div>
+          </footer>
+
+        </article>
       </section>
     </main>
   </body>
