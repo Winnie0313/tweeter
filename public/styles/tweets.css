@@ -5,13 +5,12 @@
   margin-top: 40px;
 }
 
-.tweet-username {
+article.tweet header div {
   display: flex;
   flex-direction: row;
-
 }
 
-.tweet-header {
+article.tweet header {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
