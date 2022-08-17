@@ -29,3 +29,7 @@ textarea {
   justify-content: space-between;
   padding-top: 10px;
 }
+
+.negative-count {
+  color: red;
+}
