@@ -41,10 +41,19 @@ footer>div {
   justify-content: space-around;
 }
 
-.article-with-shadow {
+article.tweet:hover{
   box-shadow: 5px 10px #c1d0f1;
 }
 
-.footer-icon-hover {
+.fa-flag:hover{
   color: rgba(227, 184, 81, 0.907);
 }
+
+.fa-share:hover{
+  color: rgba(227, 184, 81, 0.907);
+}
+
+.fa-heart:hover{
+  color: rgba(227, 184, 81, 0.907);
+}
+

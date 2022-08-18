@@ -4,35 +4,38 @@
  * Reminder: Use (and do all your DOM work in) jQuery's document ready function
  */
 $(document).ready(function () {
-  renderTweets(data);
+
+
+  // handle form submission
+  $("form").submit(function(event) {
+    event.preventDefault();
+    // get the text in the textarea
+    const message = $("#tweet-text").val();
+    console.log("this is: ", this);
+    if (message === "" || message === null) {
+      alert('Content is not present!')
+      return;
+    } 
+    
+    if (message.length > 140) {
+      alert('Content is too long!');
+      return;
+    }
+    // turn the form data to query string
+    const data = $(this).serialize();
+    $.post("/tweets/", data)
+    .then(() => {
+        console.log("tweet submitted")
+    })
+  })
+
+  loadTweets();
+
 })
 
-// Fake data taken from initial-tweets.json
-const data = [
-  {
-    "user": {
-      "name": "Newton",
-      "avatars": "https://i.imgur.com/73hZDYK.png"
-      ,
-      "handle": "@SirIsaac"
-    },
-    "content": {
-      "text": "If I have seen further it is by standing on the shoulders of giants"
-    },
-    "created_at": 1461116232227
-  },
-  {
-    "user": {
-      "name": "Descartes",
-      "avatars": "https://i.imgur.com/nlhLi3I.png",
-      "handle": "@rd" },
-    "content": {
-      "text": "Je pense , donc je suis"
-    },
-    "created_at": 1461113959088
-  }
-]
 
+
+// render each tweet in array of tweet objects
 const renderTweets = function (tweets) {
   tweets.forEach(function(tweet) {
     const $tweet = createTweetElement(tweet);
@@ -40,7 +43,9 @@ const renderTweets = function (tweets) {
   })
 }
 
+// create article element for tweet
 const createTweetElement = function (tweet) {
+  let time = timeago.format(tweet.created_at);
   let $tweet = `<article class="tweet">
     <header>
       <div>
@@ -55,7 +60,7 @@ const createTweetElement = function (tweet) {
     </div>
 
     <footer>
-      <span>${tweet.created_at}</span>
+      <span>${time}</span>
       <div>
         <i class="fa-solid fa-flag"></i>
         <i class="fa-solid fa-share"></i>
@@ -67,11 +72,10 @@ const createTweetElement = function (tweet) {
   return $tweet;
 }
 
-// // Test / driver code (temporary). Eventually will get this from the server.
-
-// const $tweet = createTweetElement(tweettweet);
-
-// // Test / driver code (temporary)
-// console.log($tweet); // to see what it looks like
-// $('.tweet-container').append($tweet); // to add it to the page so we can make sure it's got all the right elements, classes, etc.
-
+// use jQuery to make a request to /tweets and receive the array of tweets as JSON
+const loadTweets = function () {
+  $.get("/tweets/")
+  .then((result) => {
+    renderTweets(result);
+  })
+}
