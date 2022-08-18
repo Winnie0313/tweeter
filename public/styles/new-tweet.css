@@ -33,3 +33,23 @@ textarea {
 .negative-count {
   color: red;
 }
+
+.abscent-content-error {
+  display: flex;
+  flex-flow: row;
+  justify-content: center;
+  border: 3px solid;
+	color: #D8000C;
+	background-color: #fee;
+  margin: 0;
+}
+
+.long-content-error {
+  display: flex;
+  flex-flow: row;
+  justify-content: center;
+  border: 3px solid;
+	color: #D8000C;
+	background-color: #fee;
+  margin: 0;
+}

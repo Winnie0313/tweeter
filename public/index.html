@@ -60,7 +60,16 @@
     <!-- Page-specific (main) content here -->
     <main>
       <section class="new-tweet">
-        <h2 class="compose-tweet">Compose Tweet</h2>
+        <!-- show error message for form validation -->
+        <p class="abscent-content-error">
+          <i class="fa-solid fa-triangle-exclamation"></i>
+          <span>Content is not present!</span>
+        </p>
+        <p class="long-content-error">
+          <i class="fa-solid fa-triangle-exclamation"></i>
+          <span>Content is too long!</span>
+        </p>
+        <h3 class="compose-tweet">What are you humming about?</h3>
         <form action="/tweets/" method="POST">
           <!-- <label for="tweet-text">What are you humming about?</label> -->
           <textarea name="text" id="tweet-text"></textarea>

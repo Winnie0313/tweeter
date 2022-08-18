@@ -5,23 +5,39 @@
  */
 $(document).ready(function () {
 
+  $(".abscent-content-error").hide();
+  $(".long-content-error").hide();
+
 
 
   // handle form submission
   $("form").submit(function(event) {
+    $(".abscent-content-error").hide();
+    $(".long-content-error").hide();
+  
     event.preventDefault();
     // get the text in the textarea
     const message = $("#tweet-text").val();
     console.log("this is: ", this);
+
+    // form validation
+    const $errIcon = $(`<i class="fa-solid fa-triangle-exclamation"></i>`);
     if (message === "" || message === null) {
-      alert('Content is not present!')
+      $(".abscent-content-error").slideDown("slow");
+      return;
+    }
+    // else {
+    //   $(".abscent-content-error").hide();
+    // }
+    if (message.length > 140) {
+      $(".long-content-error").slideDown("slow");
       return;
     } 
     
-    if (message.length > 140) {
-      alert('Content is too long!');
-      return;
-    }
+    // else {
+    //   $(".long-content-error").hide();
+    // }
+
     // turn the form data to query string
     const data = $(this).serialize();
     $.post("/tweets/", data)
