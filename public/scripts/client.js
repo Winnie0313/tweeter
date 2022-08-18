@@ -6,6 +6,7 @@
 $(document).ready(function () {
 
 
+
   // handle form submission
   $("form").submit(function(event) {
     event.preventDefault();
@@ -25,57 +26,58 @@ $(document).ready(function () {
     const data = $(this).serialize();
     $.post("/tweets/", data)
     .then(() => {
-        console.log("tweet submitted")
+      loadTweets();
+      console.log("tweet submitted")
     })
   })
+
+  // render each tweet in array of tweet objects
+  const renderTweets = function (tweets) {
+    tweets.forEach(function(tweet) {
+      const $tweet = createTweetElement(tweet);
+      $('.tweet-container').append($tweet);
+    })
+  }
+
+  // create article element for tweet
+  const createTweetElement = function (tweet) {
+    let time = timeago.format(tweet.created_at);
+    let $tweet = `<article class="tweet">
+      <header>
+        <div>
+          <i class="fa-solid fa-user-astronaut"></i>
+          <span>${tweet.user.name}</span>
+        </div>
+        <span>${tweet.user.handle}</span>
+      </header>
+
+      <div class="tweet-text">
+        <p>${tweet.content.text}</p>
+      </div>
+
+      <footer>
+        <span>${time}</span>
+        <div>
+          <i class="fa-solid fa-flag"></i>
+          <i class="fa-solid fa-share"></i>
+          <i class="fa-solid fa-heart"></i>
+        </div>
+      </footer>
+
+    </article>`
+    return $tweet;
+  }
+
+  // use jQuery to make a request to /tweets and receive the array of tweets as JSON
+  const loadTweets = function () {
+    $.get("/tweets/")
+    .then((result) => {
+      renderTweets(result);
+    })
+  }
 
   loadTweets();
 
 })
 
 
-
-// render each tweet in array of tweet objects
-const renderTweets = function (tweets) {
-  tweets.forEach(function(tweet) {
-    const $tweet = createTweetElement(tweet);
-    $('.tweet-container').append($tweet);
-  })
-}
-
-// create article element for tweet
-const createTweetElement = function (tweet) {
-  let time = timeago.format(tweet.created_at);
-  let $tweet = `<article class="tweet">
-    <header>
-      <div>
-        <i class="fa-solid fa-user-astronaut"></i>
-        <span>${tweet.user.name}</span>
-      </div>
-      <span>${tweet.user.handle}</span>
-    </header>
-
-    <div class="tweet-text">
-      <p>${tweet.content.text}</p>
-    </div>
-
-    <footer>
-      <span>${time}</span>
-      <div>
-        <i class="fa-solid fa-flag"></i>
-        <i class="fa-solid fa-share"></i>
-        <i class="fa-solid fa-heart"></i>
-      </div>
-    </footer>
-
-  </article>`
-  return $tweet;
-}
-
-// use jQuery to make a request to /tweets and receive the array of tweets as JSON
-const loadTweets = function () {
-  $.get("/tweets/")
-  .then((result) => {
-    renderTweets(result);
-  })
-}
