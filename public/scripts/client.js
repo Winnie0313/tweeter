@@ -18,32 +18,24 @@ $(document).ready(function () {
     event.preventDefault();
     // get the text in the textarea
     const message = $("#tweet-text").val();
-    console.log("this is: ", this);
 
     // form validation
-    const $errIcon = $(`<i class="fa-solid fa-triangle-exclamation"></i>`);
     if (message === "" || message === null) {
       $(".abscent-content-error").slideDown("slow");
       return;
     }
-    // else {
-    //   $(".abscent-content-error").hide();
-    // }
     if (message.length > 140) {
       $(".long-content-error").slideDown("slow");
       return;
     } 
     
-    // else {
-    //   $(".long-content-error").hide();
-    // }
 
     // turn the form data to query string
     const data = $(this).serialize();
     $.post("/tweets/", data)
     .then(() => {
       loadTweets();
-      console.log("tweet submitted")
+      $("#tweet-text").val("");
     })
   })
 
@@ -57,6 +49,9 @@ $(document).ready(function () {
 
   // create article element for tweet
   const createTweetElement = function (tweet) {
+    //prevent cross-site cripting
+    const safeHTML = `<p>${escape(tweet.content.text)}</p>`;
+
     let time = timeago.format(tweet.created_at);
     let $tweet = `<article class="tweet">
       <header>
@@ -68,7 +63,7 @@ $(document).ready(function () {
       </header>
 
       <div class="tweet-text">
-        <p>${tweet.content.text}</p>
+      ${safeHTML}
       </div>
 
       <footer>
@@ -83,6 +78,12 @@ $(document).ready(function () {
     </article>`
     return $tweet;
   }
+
+  const escape = function (str) {
+    let div = document.createElement("div");
+    div.appendChild(document.createTextNode(str));
+    return div.innerHTML;
+  };
 
   // use jQuery to make a request to /tweets and receive the array of tweets as JSON
   const loadTweets = function () {
