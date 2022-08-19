@@ -6,8 +6,9 @@ This repository is the starter code for the project: Students will fork and clon
 
 ## Final Product
 
-!["screenshot description"](#)
-!["screenshot description"](#)
+!["responsive-1024px-page"](https://github.com/Winnie0313/tweeter/blob/master/docs/responsive-1024px-page.png?raw=true)
+!["responsive-768px-page"](https://github.com/Winnie0313/tweeter/blob/master/docs/responsive-768px-page.png?raw=true)
+!["tweet-submission-form-validation"](https://github.com/Winnie0313/tweeter/blob/master/docs/form-validation.png?raw=true)
 
 
 ## Getting Started
