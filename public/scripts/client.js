@@ -8,8 +8,6 @@ $(document).ready(function () {
   $(".abscent-content-error").hide();
   $(".long-content-error").hide();
 
-
-
   // handle form submission
   $("form").submit(function(event) {
     $(".abscent-content-error").hide();
@@ -29,7 +27,6 @@ $(document).ready(function () {
       return;
     } 
     
-
     // turn the form data to query string
     const data = $(this).serialize();
     $.post("/tweets/", data)
@@ -41,9 +38,10 @@ $(document).ready(function () {
 
   // render each tweet in array of tweet objects
   const renderTweets = function (tweets) {
+    $('.tweet-container').html('');
     tweets.forEach(function(tweet) {
       const $tweet = createTweetElement(tweet);
-      $('.tweet-container').append($tweet);
+      $('.tweet-container').prepend($tweet);
     })
   }
 
@@ -56,7 +54,7 @@ $(document).ready(function () {
     let $tweet = `<article class="tweet">
       <header>
         <div>
-          <i class="fa-solid fa-user-astronaut"></i>
+          <img class="tweet-avatar" src=${tweet.user.avatars} width="30" height="30">
           <span>${tweet.user.name}</span>
         </div>
         <span>${tweet.user.handle}</span>
