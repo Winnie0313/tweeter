@@ -3,7 +3,7 @@
  * jQuery is already loaded
  * Reminder: Use (and do all your DOM work in) jQuery's document ready function
  */
-$(document).ready(function () {
+$(document).ready(function() {
 
   $(".abscent-content-error").hide();
   $(".long-content-error").hide();
@@ -25,28 +25,28 @@ $(document).ready(function () {
     if (message.length > 140) {
       $(".long-content-error").slideDown("slow");
       return;
-    } 
+    }
     
     // turn the form data to query string
     const data = $(this).serialize();
     $.post("/tweets/", data)
-    .then(() => {
-      loadTweets();
-      $("#tweet-text").val("");
-    })
-  })
+      .then(() => {
+        loadTweets();
+        $("#tweet-text").val("");
+      });
+  });
 
   // render each tweet in array of tweet objects
-  const renderTweets = function (tweets) {
+  const renderTweets = function(tweets) {
     $('.tweet-container').html('');
     tweets.forEach(function(tweet) {
       const $tweet = createTweetElement(tweet);
       $('.tweet-container').prepend($tweet);
-    })
-  }
+    });
+  };
 
   // create article element for tweet
-  const createTweetElement = function (tweet) {
+  const createTweetElement = function(tweet) {
     //prevent cross-site cripting
     const safeHTML = `<p>${escape(tweet.content.text)}</p>`;
 
@@ -73,26 +73,26 @@ $(document).ready(function () {
         </div>
       </footer>
 
-    </article>`
+    </article>`;
     return $tweet;
-  }
+  };
 
-  const escape = function (str) {
+  const escape = function(str) {
     let div = document.createElement("div");
     div.appendChild(document.createTextNode(str));
     return div.innerHTML;
   };
 
   // use jQuery to make a request to /tweets and receive the array of tweets as JSON
-  const loadTweets = function () {
+  const loadTweets = function() {
     $.get("/tweets/")
-    .then((result) => {
-      renderTweets(result);
-    })
-  }
+      .then((result) => {
+        renderTweets(result);
+      });
+  };
 
   loadTweets();
 
-})
+});
 
 

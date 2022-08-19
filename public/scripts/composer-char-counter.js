@@ -6,7 +6,7 @@ $(document).ready(function() {
     } else {
       $(".counter").css('color', 'black');
     }
-    $(".counter").html(140-text.length);
-  })
+    $(".counter").html(140 - text.length);
+  });
 
 });
