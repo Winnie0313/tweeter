@@ -5,12 +5,12 @@
  */
 $(document).ready(function() {
 
-  $(".abscent-content-error").hide();
+  $(".absent-content-error").hide();
   $(".long-content-error").hide();
 
   // handle form submission
   $("form").submit(function(event) {
-    $(".abscent-content-error").hide();
+    $(".absent-content-error").hide();
     $(".long-content-error").hide();
   
     event.preventDefault();
@@ -19,7 +19,7 @@ $(document).ready(function() {
 
     // form validation
     if (message === "" || message === null) {
-      $(".abscent-content-error").slideDown("slow");
+      $(".absent-content-error").slideDown("slow");
       return;
     }
     if (message.length > 140) {
