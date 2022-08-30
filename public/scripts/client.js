@@ -33,7 +33,12 @@ $(document).ready(function() {
       .then(() => {
         loadTweets();
         $("#tweet-text").val("");
+        // reset the counter to 140
+        $(".counter").val("140");
       });
+    
+    // reset the counter to 140 after sumbiting a tweet
+    
   });
 
   // render each tweet in array of tweet objects
